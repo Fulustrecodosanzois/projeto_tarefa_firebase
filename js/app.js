@@ -15,7 +15,7 @@ let idAtualizar = ""
 async function inserirtarefa() {
     try {
         // adicionar documentos com gerador de id 
-        const docRef = await addDoc(collection(db, "tarefa"), {
+        const docRef = await addDoc(collection(db, "teste"), {
             nome: nome.value,
             data: data.value,
             status: status.value
@@ -29,7 +29,7 @@ async function inserirtarefa() {
 
 async function consultarTarefa() {
     bloco.innerHTML = "" // limpando o elemento HTML antes de inserir novos registro, para não acumular dados 
-    const busca = query(collection(db, "tarefa"), orderBy("nome"));
+    const busca = query(collection(db, "teste"), orderBy("nome"));
 
     const resultado = await getDocs(busca);
     resultado.forEach((item) => {
@@ -75,7 +75,7 @@ async function consultarTarefa() {
 async function excluirTarefa(id) {
     let resultado = confirm("Tem certeza que deseja excluir?")
     if (resultado) {
-        await deleteDoc(doc(db, "tarefa", id));
+        await deleteDoc(doc(db, "teste", id));
         alert("Tarefa excluida com sucesso")
 
         consultarTarefa()//recarrega a lista atualizada, sem isso precisaria o user atualizar a página
@@ -84,7 +84,7 @@ async function excluirTarefa(id) {
 
 async function consultarUnico(id) {
     idAtualizar = id // passando o id do documento salvo lpa no banco para a variavel 
-    const banco = await collection(db, "tarefa")
+    const banco = await collection(db, "teste")
     const busca = query(banco, where(documentId(), "==", id))
 
     const consulta = await getDocs(busca)
@@ -99,7 +99,7 @@ async function consultarUnico(id) {
 }
 
 async function atualizarTarefa() {
-    const tarefa = doc(db, "tarefa", idAtualizar);
+    const tarefa = doc(db, "teste", idAtualizar);
 
     // Set the "capital" field of the city 'DC'
     await updateDoc(tarefa, {
